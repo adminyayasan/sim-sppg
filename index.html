@@ -8936,27 +8936,6 @@ function openEditPendingModal(id) {
   openModal('modalEditPending');
 }
 
-// ===== WHATSAPP REMINDER (GRATIS — via wa.me, klik manual, BUKAN API) =====
-function sendWAReminderPending(id) {
-  var p = allPending.find(function(x) { return x.id === id; });
-  if (!p) { showToast('error', 'Error', 'Data pending tidak ditemukan'); return; }
-
-  var nomorWA = prompt('Masukkan nomor WhatsApp tujuan (format: 628xxxxxxxxxx):', '');
-  if (!nomorWA || !nomorWA.trim()) return;
-  var nomorClean = nomorWA.replace(/[^0-9]/g, '');
-  if (nomorClean.startsWith('0')) nomorClean = '62' + nomorClean.substring(1);
-
-  var pesan = 'Halo, ini pengingat pembayaran dari SIM-SPPG.\n\n' +
-    'Referensi: ' + (p.transaksiRef || '-') + '\n' +
-    'Deskripsi: ' + (p.deskripsi || '-') + '\n' +
-    'Tanggal Pending: ' + (p.tanggalPending || '-') + '\n' +
-    'Rencana Pembayaran: ' + (p.tanggalPayment || '-') + '\n\n' +
-    'Mohon segera diproses. Terima kasih.';
-
-  var waUrl = 'https://wa.me/' + nomorClean + '?text=' + encodeURIComponent(pesan);
-  window.open(waUrl, '_blank');
-}
-
 function toggleTglLunas() {
   var status = $('editPendingStatus').value;
   var tglEl = $('editPendingTglLunas');
