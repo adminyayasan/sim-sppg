@@ -1341,6 +1341,7 @@
   overscroll-behavior: contain;
 }
 @keyframes fadeIn { to { opacity: 1; } }
+@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
 .modal-box {
   background: white;
   border-radius: 0;
@@ -5482,10 +5483,6 @@ function syncApprovalBadgeToQuickAccess() {
   dst.style.display = (parseInt(src.textContent) > 0) ? 'flex' : 'none';
 }
 
-function initStatsCarouselDots() {
-  // Dots digantikan oleh CSS scroll-snap native — tidak perlu JS
-}
-
 function switchPage(page, el) {
   // Hide all pages
   var pages = document.querySelectorAll('.page-section');
@@ -8432,8 +8429,6 @@ function saveAddSerahTerima() {
     .withFailureHandler(function() { showLoading(false); showToast('error', 'Gagal', 'Terjadi kesalahan'); })
     .addSerahTerima(data, { role: currentUser.role, user: currentUser.email });
 }
-function clearStTtd(canvasId) { var c = $(canvasId); if (c) { var ctx = c.getContext('2d'); ctx.clearRect(0, 0, c.width, c.height); } }
-
 // ============================================================
 // 16. MENU MBG (AHLI GIZI)
 // ============================================================
