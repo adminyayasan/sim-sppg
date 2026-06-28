@@ -2237,10 +2237,7 @@
 
     /* Mobile label hide */
     .btn-label-hide { display: inline; }
-        @media (max-width: 767px) {
-      .action-btn { width: 44px; height: 44px; font-size: 15px; }
-      .action-group { gap: 6px; }
-    }
+            /* (mobile action-btn override sudah didefinisikan di atas) */
     @media (max-width: 400px) {
       .btn-label-hide { display: none; }
       .btn.btn-sm { padding: 8px 10px; }
@@ -2776,8 +2773,8 @@ body.dark-mode .bnav-item.active i {
 
         <div class="content">
 
-      <!-- R4: Breadcrumb Navigation -->
-      <nav class="breadcrumb" id="breadcrumbNav">
+            <!-- R4: Breadcrumb Navigation -->
+      <nav class="breadcrumb hidden" id="breadcrumbNav" style="display:none;">
         <a onclick="switchPage('dashboard')"><i class="fas fa-home" style="font-size:10px;"></i> Dashboard</a>
         <span class="separator">/</span>
         <span id="breadcrumbCurrent">Dashboard</span>
@@ -2796,8 +2793,18 @@ body.dark-mode .bnav-item.active i {
         <div class="spinner"></div>
       </div>
 
-      <!-- ==================== DASHBOARD PAGE ==================== -->
+            <!-- ==================== DASHBOARD PAGE ==================== -->
       <div id="page-dashboard" class="page-section">
+        <!-- R3: Skeleton Loading Container (ditampilkan saat data belum siap) -->
+        <div id="skeletonDashboard" class="skeleton-screen hidden" style="margin-bottom:16px;">
+          <div class="stats-grid">
+            <div class="skeleton-stat-card"><div class="skeleton-icon"></div><div class="skeleton-info"><div class="skeleton-line medium"></div><div class="skeleton-line short"></div></div></div>
+            <div class="skeleton-stat-card"><div class="skeleton-icon"></div><div class="skeleton-info"><div class="skeleton-line medium"></div><div class="skeleton-line short"></div></div></div>
+            <div class="skeleton-stat-card"><div class="skeleton-icon"></div><div class="skeleton-info"><div class="skeleton-line medium"></div><div class="skeleton-line short"></div></div></div>
+            <div class="skeleton-stat-card"><div class="skeleton-icon"></div><div class="skeleton-info"><div class="skeleton-line medium"></div><div class="skeleton-line short"></div></div></div>
+          </div>
+        </div>
+        <!-- dots carousel dihapus — scroll snap ditangani CSS native -->
         <div class="stats-grid" id="dashboardStats">
           <div class="stat-card">
             <div class="stat-icon primary"><i class="fas fa-wallet"></i></div>
@@ -2866,16 +2873,6 @@ body.dark-mode .bnav-item.active i {
             <canvas id="cashFlowChart"></canvas>
           </div>
         </div>
-                <!-- R3: Skeleton Loading Container (ditampilkan saat data belum siap) -->
-        <div id="skeletonDashboard" class="skeleton-screen hidden" style="margin-bottom:16px;">
-          <div class="stats-grid">
-            <div class="skeleton-stat-card"><div class="skeleton-icon"></div><div class="skeleton-info"><div class="skeleton-line medium"></div><div class="skeleton-line short"></div></div></div>
-            <div class="skeleton-stat-card"><div class="skeleton-icon"></div><div class="skeleton-info"><div class="skeleton-line medium"></div><div class="skeleton-line short"></div></div></div>
-            <div class="skeleton-stat-card"><div class="skeleton-icon"></div><div class="skeleton-info"><div class="skeleton-line medium"></div><div class="skeleton-line short"></div></div></div>
-            <div class="skeleton-stat-card"><div class="skeleton-icon"></div><div class="skeleton-info"><div class="skeleton-line medium"></div><div class="skeleton-line short"></div></div></div>
-          </div>
-        </div>
-        <!-- dots carousel dihapus — scroll snap ditangani CSS native -->
       </div>
 
       <!-- ==================== PROFIL PAGE ==================== -->
@@ -5544,7 +5541,7 @@ function buildBottomNav() {
       badgeHtml +
       '<i class="fas ' + meta.icon + '"></i><span>' + meta.label + '</span></button>';
   });
-  html += '<button class="bnav-item" onclick="openMoreSheet()"><i class="fas fa-th"></i><span>Lainnya</span></button>';
+    html += '<button class="bnav-item" onclick="openMoreSheet()"><span class="bnav-lainnya-dot"></span><i class="fas fa-th"></i><span>Lainnya</span></button>';
   $('bottomNavInner').innerHTML = html;
   syncApprovalBadgeToBottomNav();
 }
@@ -5638,6 +5635,7 @@ function updateBreadcrumb(page, pageLabel) {
     return;
   }
   breadcrumb.style.display = 'flex';
+  breadcrumb.classList.remove('hidden');
   var html = '<a onclick="switchPage(\'dashboard\')"><i class="fas fa-home" style="font-size:10px;"></i> Dashboard</a><span class="separator">/</span>';
   // Untuk halaman transaksi yang sedang detail, gunakan format spesial
   html += '<span id="breadcrumbCurrent">' + esc(pageLabel) + '</span>';
