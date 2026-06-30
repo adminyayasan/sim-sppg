@@ -7092,11 +7092,6 @@ function switchPage(page, el) {
   // Hide all pages
   var pages = document.querySelectorAll('.page-section');
   pages.forEach(function(p) { p.classList.add('hidden'); });
-
-function switchPage(page, el) {
-  // Hide all pages
-  var pages = document.querySelectorAll('.page-section');
-  pages.forEach(function(p) { p.classList.add('hidden'); });
   // Show target page
   var target = $('page-' + page);
     if (target) { target.classList.remove('hidden'); target.style.animation = 'none'; target.offsetHeight; target.style.animation = ''; }
