@@ -3599,6 +3599,10 @@
         transition: transform 0.2s, box-shadow 0.2s !important;
         margin-bottom: 0 !important;
         border-left: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
       }
       .table-container tbody tr:hover {
         background: var(--white) !important;
@@ -3617,6 +3621,9 @@
         padding: 0 !important;
         border: none !important;
         color: var(--slate-700) !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
       }
       body.dark-mode .table-container tbody td {
         color: #cbd5e1 !important;
@@ -3660,9 +3667,10 @@
           "select kode tanggal"
           "item item item"
           "nominal nominal nominal"
-          "sppg penginput metode"
+          "sppg sppg metode"
+          "penginput penginput penginput"
           "aksi aksi aksi" !important;
-        grid-template-columns: auto 1fr auto !important;
+        grid-template-columns: minmax(0,1fr) minmax(0,1fr) minmax(0,auto) !important;
       }
       /* R2: Status left border indicator simulated via colored top-left badge or shadow in mobile */
       .approval-table tbody tr.status-belum-bayar { box-shadow: -4px 4px 12px rgba(244,63,94,0.08), 0 4px 12px rgba(0,0,0,0.03) !important; border-left: 4px solid var(--rose) !important; }
@@ -3675,12 +3683,26 @@
       .approval-table tbody tr td:nth-child(2) { display: none !important; }
       .approval-table tbody tr td:nth-child(3) { grid-area: kode; text-align: left; }
       .approval-table tbody tr td:nth-child(4) { grid-area: tanggal; text-align: right; font-size: 12px !important; color: var(--slate-400) !important; }
-      .approval-table tbody tr td:nth-child(5) { grid-area: sppg; text-align: left; }
-      .approval-table tbody tr td:nth-child(6) { grid-area: item; text-align: left; font-size: 15px !important; font-weight: 700 !important; color: var(--slate-800) !important; }
+      .approval-table tbody tr td:nth-child(5) { grid-area: sppg; text-align: left; min-width: 0; overflow: hidden; }
+      .approval-table tbody tr td:nth-child(5) .badge { max-width: 100%; overflow: hidden; text-overflow: ellipsis; display: inline-block; vertical-align: middle; }
+      .approval-table tbody tr td:nth-child(6) { grid-area: item; text-align: left; font-size: 15px !important; font-weight: 700 !important; color: var(--slate-800) !important; word-break: break-word; }
       body.dark-mode .approval-table tbody tr td:nth-child(6) { color: #f1f5f9 !important; }
       .approval-table tbody tr td:nth-child(7) { grid-area: nominal; text-align: left; font-size: 18px !important; font-weight: 800 !important; color: var(--emerald) !important; margin: 4px 0; }
-      .approval-table tbody tr td:nth-child(8) { grid-area: metode; text-align: right; }
-      .approval-table tbody tr td:nth-child(9) { grid-area: penginput; text-align: center; font-size: 12px !important; color: var(--slate-500) !important; }
+      .approval-table tbody tr td:nth-child(8) { grid-area: metode; text-align: right; min-width: 0; overflow: hidden; flex-shrink: 0; }
+      .approval-table tbody tr td:nth-child(8) .badge { white-space: nowrap; }
+      .approval-table tbody tr td:nth-child(9) {
+        grid-area: penginput;
+        text-align: left;
+        font-size: 12px !important;
+        color: var(--slate-500) !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        border-top: 1px dashed var(--slate-100) !important;
+        padding-top: 8px !important;
+        margin-top: 2px;
+      }
+      body.dark-mode .approval-table tbody tr td:nth-child(9) { border-top-color: #334155 !important; }
       .approval-table tbody tr td:nth-child(10) { 
         grid-area: aksi; 
         border-top: 1px solid var(--slate-100) !important; 
