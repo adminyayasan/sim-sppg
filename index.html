@@ -104,6 +104,7 @@
       -webkit-text-size-adjust: 100%;
       text-size-adjust: 100%;
       height: 100%;
+      height: -webkit-fill-available;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
       touch-action: pan-y;
@@ -297,6 +298,11 @@
 
     /* Toggle switch wrap (Upload Mandiri ON/OFF) */
     body.dark-mode .toggle-switch-wrap { background: #1e293b; border-color: #334155; color: #cbd5e1; }
+    body.dark-mode .badge-amber  { background: rgba(245,158,11,0.18); color: #fbbf24; }
+    body.dark-mode .badge-green  { background: rgba(16,185,129,0.18); color: #34d399; }
+    body.dark-mode .badge-red    { background: rgba(244,63,94,0.18); color: #fb7185; }
+    body.dark-mode .badge-blue   { background: rgba(59,130,246,0.18); color: #60a5fa; }
+    body.dark-mode .badge-purple { background: rgba(139,92,246,0.18); color: #a78bfa; }
     body.dark-mode .badge-orange { background: rgba(249,115,22,0.15); color: #fb923c; border-color: #9a3412; }
 
     /* Panah dropdown <select> — SVG sebelumnya hardcode stroke abu gelap, nyaris tak terlihat di field gelap */
@@ -466,57 +472,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Stat Cards Grid */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-
-    .stat-card {
-      background: var(--white);
-      border-radius: var(--radius-lg);
-      padding: 16px;
-      box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      transition: all 0.2s ease;
-    }
-
-    .stat-card:active {
-      transform: scale(0.98);
-    }
-
-    .stat-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: var(--radius);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-    }
-
-    .stat-icon.primary { background: var(--primary-light); color: var(--primary); }
-    .stat-icon.emerald { background: var(--emerald-light); color: var(--emerald); }
-    .stat-icon.orange { background: var(--orange-light); color: var(--orange); }
-    .stat-icon.rose { background: var(--rose-light); color: var(--rose); }
-
-    .stat-value {
-      font-size: 24px;
-      font-weight: 800;
-      color: var(--slate-800);
-      letter-spacing: -0.5px;
-    }
-
-    .stat-label {
-      font-size: 12px;
-      color: var(--slate-500);
-      font-weight: 500;
-    }
-
     /* Transaction List Mobile */
     .transaction-list {
       display: flex;
@@ -571,7 +526,7 @@
 
     .trans-date {
       font-size: 11px;
-      color: var(--slate-400);
+      color: #52606d;
       margin-top: 2px;
     }
 
@@ -914,6 +869,10 @@
       .bnav-item span { font-size: 9px; }
       .bnav-fab { width: 52px; height: 52px; }
     }
+    @media (max-width: 360px) {
+      .pin-grid { gap: 5px; }
+      .pin-input { padding: 12px 2px; font-size: 17px; }
+    }
 
     @media (min-width: 768px) {
       .main-container {
@@ -1113,7 +1072,7 @@
       background-position: right 12px center;
       padding-right: 36px;
     }
-    .form-hint { font-size: 11px; color: var(--slate-400); margin-top: 4px; }
+    .form-hint { font-size: 11px; color: #52606d; margin-top: 4px; }
     .form-error { color: var(--rose); font-size: 12px; margin-top: 4px; display: none; align-items: center; gap: 4px; }
     .form-error.show { display: flex; }
     .form-row { display: grid; grid-template-columns: 1fr; gap: 0; }
@@ -1896,8 +1855,8 @@
     }
     tr:hover .action-group { opacity: 1; }
       .action-btn {
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
       border-radius: 8px;
       border: none;
       cursor: pointer;
@@ -2145,10 +2104,12 @@
   border-radius: 0;
   width: 100%;
   max-width: 100%;
-  height: 100dvh;
   height: 100vh;
-  max-height: 100dvh;
+  height: -webkit-fill-available;
+  height: 100dvh;
   max-height: 100vh;
+  max-height: -webkit-fill-available;
+  max-height: 100dvh;
   box-shadow: none;
   overflow: hidden;
   transform: translateY(100%);
@@ -2869,6 +2830,7 @@
     .autocomplete-dropdown.active { display: block; }
     .autocomplete-item {
       padding: 10px 14px;
+      min-height: 40px;
       cursor: pointer;
       font-size: 13px;
       border-bottom: 1px solid var(--slate-100);
@@ -2876,6 +2838,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      box-sizing: border-box;
     }
     .autocomplete-item:hover { background: var(--slate-50); }
     .autocomplete-item:last-child { border-bottom: none; }
@@ -2996,6 +2959,7 @@
     .text-purple { color: var(--purple); }
     .text-slate { color: var(--slate-500); }
     .text-primary { color: var(--primary); }
+    .icon-modal-title { color: var(--primary); margin-right: 8px; }
 
     /* Mobile label hide */
     .btn-label-hide { display: inline; }
@@ -4850,9 +4814,11 @@
   </div><!-- /main-wrapper -->
 
   <!-- ==================== BOTTOM NAVIGATION (MOBILE) ==================== -->
+    <footer>
     <nav class="bottom-nav" id="bottomNav" aria-label="Navigasi bawah">
-    <div class="bottom-nav-inner" id="bottomNavInner"></div>
-  </nav>
+      <div class="bottom-nav-inner" id="bottomNavInner"></div>
+    </nav>
+  </footer>
   <!-- R7: Tombol "Lainnya" dengan dot indicator untuk notifikasi -->
   <style>
     #bottomNavInner .bnav-item:last-child { position: relative; }
@@ -4877,7 +4843,7 @@
     <div class="modal-box modal-xl">
       <div class="modal-header">
         <div>
-          <h3 id="modalDetailTitle"><i class="fas fa-file-invoice" style="color:var(--primary);margin-right:8px;"></i>Detail Transaksi</h3>
+          <h3 id="modalDetailTitle"><i class="fas fa-file-invoice icon-modal-title"></i>Detail Transaksi</h3>
           <p>Informasi lengkap transaksi &amp; dokumen pendukung</p>
         </div>
         <button onclick="closeModal('modalDetail')" class="modal-close"><i class="fas fa-times"></i></button>
